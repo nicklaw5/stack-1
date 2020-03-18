@@ -25,6 +25,8 @@ the S3 bucket if the there are no objects in the bucket.
 - All commands and scripts have been constructed wih a Unix shell interpreter (primarily Bash)
 in mind. You may be required to tweak each command/step to satisfy your operating environment.
 - GitHub Actions was used as the CI/CD pipeline provider.
+- The TLS certificate private key has been included in the source control for Stack 3 for demo
+purposes only. Private keys should always be kept hidden from public visibility.
 
 ## Manual Steps
 
@@ -40,6 +42,7 @@ communicate with AWS and provision infrastructure:
 - `AmazonEC2FullAccess`
 - `AmazonRDSFullAccess`
 - `AmazonRoute53FullAccess`
+- `AWSCertificateManagerFullAccess`
 
 ## Stack 1: Terraform S3 Backend & DynamoDB Locking
 
@@ -123,6 +126,8 @@ Additionally you can check the instance system/boot logs from within the AWS con
     [   56.678123] cloud-init[1376]: DB_CONNECTION: 1
     ```
 
+Note: it best to view these logs soon after a instance comes to life.
+
 ### How can I trigger the ASG to scale?
 
 There is a small Bash script that can be found [here](https://github.com/nicklaw5/stack-3/blob/master/curl-loop.sh).
@@ -143,6 +148,7 @@ the ELBs target group.
 
 ## Future Improvements
 
-- Add TLS termination to both the ALB and the NLB
 - Don't provision the Route53 zone in Stack 3. It should have it's own stack.
-- Don't provision the RDS instance in Stack 3. It should have it's own stack.
+- Don't provision the RDS instance in Stack 3. It should have it's own stack for data retention purposes.
+- Add additional network restrictions with VPC and subnet ACLs. For this small example, the VPC, subnet
+and peering connection route tables serve as rudimentary network boundaries.
