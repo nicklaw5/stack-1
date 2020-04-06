@@ -1,7 +1,5 @@
 # stack-1
 
-Visit http://demo.nicholaslaw.com.au/ for working demo.
-
 See these repos also:
 
 - Stack 2 - https://github.com/nicklaw5/stack-2
